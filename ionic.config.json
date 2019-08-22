@@ -1,0 +1,7 @@
+{
+  "name": "phelogs",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}
