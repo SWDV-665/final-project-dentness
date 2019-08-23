@@ -1,0 +1,22 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>
+            {{ title }}
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-list lines="none">
+        <ion-searchbar
+                [(ngModel)]="searchTerm"
+                (ionChange)="setFilteredItems()">
+        </ion-searchbar>
+
+        <ion-item *ngFor="let food of foods; let i = index">
+            <span>{{ food.description }} ({{ food.phe_multiplier}})</span>
+            <ion-button color="secondary" item-end><ion-icon name="add"></ion-icon></ion-button>
+        </ion-item>
+
+    </ion-list>
+</ion-content>
