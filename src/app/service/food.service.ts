@@ -29,7 +29,8 @@ export const NullFoodItem: FoodItem = {
 export class FoodService {
     public foods: FoodItem[] = [];
     private _localFileName = 'phelogs.data';
-    private baseUrl = 'http://localhost:8080';
+    // private baseUrl = 'http://localhost:8080';
+    private baseUrl = 'https://phelogs-mobile.herokuapp.com'; // HEROKU
     public dataChanged$: Observable<boolean>;
     private dataChangeSubject: Subject<boolean>;
 
