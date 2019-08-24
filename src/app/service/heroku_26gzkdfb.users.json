@@ -1,0 +1,32 @@
+{ 
+    "_id" : ObjectId("5d5329d520e3363a08501a00"), 
+    "first_name" : "Bubba", 
+    "last_name" : "Duck", 
+    "email" : "me@not.here", 
+    "current_target_phe_level" : NumberDecimal("600"), 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5d53321c8677353b0b411a83"), 
+    "first_name" : "Mighty", 
+    "last_name" : "Mouse", 
+    "email" : "hereiam@savetheday.com", 
+    "current_target_phe_level" : NumberDecimal("400"), 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5d5c21ed25989b6c5bef313b"), 
+    "first_name" : "Real", 
+    "last_name" : "User", 
+    "email" : "nobody@home.local", 
+    "password" : "abc123", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5d6162d4225d66441dd32d82"), 
+    "first_name" : "USDA", 
+    "last_name" : "DEPT", 
+    "email" : "USDAm@fed.gov", 
+    "password" : "abc123", 
+    "__v" : NumberInt(0)
+}
