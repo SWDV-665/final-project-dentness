@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { FoodService } from '../service/food.service';
+
 
 @Component({
   selector: 'info-tab',
@@ -7,6 +9,10 @@ import { Component } from '@angular/core';
 })
 export class InfoPage {
 
-  constructor() {}
+  constructor(public foodService: FoodService) {}
+
+  refreshData() {
+    this.foodService.refreshFoods();
+  }
 
 }

@@ -1,23 +1,88 @@
 import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Observable, Subject} from "rxjs";
+import {catchError} from "rxjs/operators";
+
+//import {File} from '@ionic-native/file/ngx';
+
+export interface FoodItem {
+    _id: String,
+    public: boolean,
+    description: String,
+    phe_multiplier: number,
+    source_user: String,
+    __v: number
+}
+
+export const NullFoodItem: FoodItem = {
+    _id: "",
+    description: "",
+    phe_multiplier: 0.0,
+    public: false,
+    __v: 0,
+    source_user: ""
+};
 
 @Injectable({
     providedIn: 'root'
 })
-
 export class FoodService {
-    public foods = [];
+    public foods: FoodItem[] = [];
+    private _localFileName = 'phelogs.data';
+    private baseUrl = 'http://localhost:8080';
+    public dataChanged$: Observable<boolean>;
+    private dataChangeSubject: Subject<boolean>;
 
-    constructor() {
-        this.foods = this.loadFoodsLocally();
+    constructor(public http: HttpClient /*, private file: File*/) {
+        this.dataChangeSubject = new Subject<boolean>();
+        this.dataChanged$ = this.dataChangeSubject.asObservable();
+        this.loadFoodsLocally()
+    }
+
+    getFoodItemById(id) {
+        return this.foods.find(x => {
+            return x._id === id;
+        });
     }
 
     refreshFoods() {
-        this.foods = this.getFoodsFromAPI();
+        this.getFoodsFromAPI();
         this.storeFoodsLocally(this.foods);
+        this.loadFoodsLocally();
     }
 
     private loadFoodsLocally() {
-        return [{
+        console.log('loading foods...');
+        this.getFoodsFromAPI();
+        // this.file.readAsText(this.file.dataDirectory, 'phelogs.data').then(r => {
+        //     this.foods = <FoodItem[]>JSON.parse(r) || [];
+        // }).catch(err =>{
+        //     console.log(err);
+        // })
+    }
+
+    private storeFoodsLocally(foods) {
+        console.log('Not implemented...');
+        this.dataChangeSubject.next(true);
+        // this.file.writeExistingFile(this.file.dataDirectory, this._localFileName, JSON.stringify(this.foods)).then(r => {
+        //     console.log('saved...')
+        // });
+    }
+
+    private getFoodsFromAPI()  {
+        console.log('Getting foods from API... ' + this.baseUrl + '/foods');
+        this.http.get<FoodItem[]>(this.baseUrl + '/foods').subscribe(
+            foods => {
+                console.log('made it here with ' + foods.length + ' records.');
+                this.foods = foods;
+                this.dataChangeSubject.next(true);
+            },
+            error => console.log(error)
+        );
+    }
+
+    private bypassAPI() {
+        this.foods = <FoodItem[]>JSON.parse(JSON.stringify([{
             "_id": "5d5f518c2bd1232c168f9d9e",
             "public": true,
             "description": "Apples, dried, sulfured, stewed, with added sugar",
@@ -417,21 +482,6 @@ export class FoodService {
                 "source_user": "5d5329d520e3363a08501a00",
                 "__v": 0
             }
-        ];
-    }
-
-    private storeFoodsLocally(foods) {
-        // store in local file.
-        console.log('saving foods...');
-    }
-
-    private getFoodsFromAPI() {
-        return this.loadFoodsLocally();
-    }
-
-    filterItems(searchTerm) {
-        return this.foods.filter(food => {
-            return food.description.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1;
-        });
+        ]));
     }
 }

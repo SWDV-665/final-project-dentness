@@ -1,9 +1,22 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>calculator</ion-title>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+        <ion-title>Calculator</ion-title>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+    <ion-card>
+        <ion-card-content>
+            <span>{{ foodItem.description }} - ({{foodItem.phe_multiplier}} mgPHE/g)</span>
+        </ion-card-content>
+        <ion-card-content>
+            <ion-label>Weight: </ion-label>
+            <ion-input placeholder="Enter Weight" inputmode="numeric" [(ngModel)]="weight"></ion-input>
+            <ion-item>Total PHE: {{ current_phe }} mgPHE</ion-item>
+            <ion-button expand="full" color="secondary" (click)="calculatePhe()">Calculate</ion-button>
+        </ion-card-content>
+    </ion-card>
 </ion-content>

@@ -1,9 +1,35 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>
-      PHELogs - Food Listing
-    </ion-title>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-title>
+            PHELogs - Info
+        </ion-title>
+    </ion-toolbar>
 </ion-header>
 
-<ion-content></ion-content>
+<ion-content padding>
+    <ion-card>
+        <ion-card-header align-self-center=""><h1 color="primary">Purpose</h1></ion-card-header>
+        <div padding>
+            <p color="dark">PHE Logs is a mobile app to expose Phenylalanine content of common foods. These measures are
+                used by
+                persons diagnosed with Phenylketonuria in measuring their daily allowance of protein.
+            </p>
+            <p color="dark">For years, our family created a game out of memorizing these numbers. While it was
+                interesting,
+                inevitably, we would argue over who was right when there was a difference. The primary source of our
+                data was a book that had PHE measurements listed much like a phone book. We have always wanted a mobile
+                solution like PHELogs.
+            </p>
+        </div>
+    </ion-card>
+    <ion-card>
+        <ion-card-header><h1 color="primary">Refresh Your Data</h1></ion-card-header>
+        <div padding>
+            <span color="dark">
+              The food data is stored locally to this application, which allows the app to work in offline mode.
+              Press the button below to resync with the food list server and update your local data.
+            </span>
+            <ion-button expand="block" color="success" (click)="refreshData()">Refresh</ion-button>
+        </div>
+    </ion-card>
+</ion-content>
